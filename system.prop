@@ -1,0 +1,62 @@
+# ILLUMI
+# DEMONICA
+# www.bento.me/illumi
+
+# SYSTEM.PROP
+
+# VIRTUAL MEMORY OPT
+persist.sys.vm.block_dump=0
+persist.sys.vm.compact_memory=1
+persist.sys.vm.compact_unevictable_allowed=1
+persist.sys.vm.dirty_ratio=90
+persist.sys.vm.dirty_bytes=0
+persist.sys.vm.dirty_background_ratio=95
+persist.sys.vm.dirty_expire_centisecs=1000
+persist.sys.vm.dirty_writeback_centisecs=2000
+persist.sys.vm.dirtytime_expire_centisecs=43200
+persist.sys.vm.drop_caches=3
+persist.sys.vm.extra_free_kbytes=29615
+persist.sys.vm.extfrag_threshold=500
+persist.sys.vm.laptop_mode=0
+persist.sys.vm.legacy_va_layout=0
+persist.sys.vm.lowmem_reserve_ratio=25632
+persist.sys.vm.mmap_rnd_compat_bits=16
+persist.sys.vm.max_map_count=65530
+persist.sys.vm.min_free_kbytes=7610
+persist.sys.vm.mmap_min_addr=32768
+persist.sys.vm.mmap_rnd_bits=24
+persist.sys.vm.nr_pdflush_threads=0
+persist.sys.vm.oom_dump_tasks=1
+persist.sys.vm.oom_kill_allocating_task=0
+persist.sys.vm.overcommit_kbytes=0
+persist.sys.vm.overcommit_memory=1
+persist.sys.vm.overcommit_ratio=100
+persist.sys.vm.page-cluster=1
+persist.sys.vm.panic.on.oom=0
+persist.sys.vm.percpu_pagelist_fraction=0
+persist.sys.vm.swap_ratio_enable=0
+persist.sys.vm.swappiness=100
+persist.sys.vm.stat_interval=30
+persist.sys.vm.user_reserve_kbytes=131072
+persist.sys.vm.vfs_cache_pressure=10
+persist.sys.vm.watermark_scale_factor=32
+
+# LOWRAM-FLAG
+ro.config.low_ram=true
+ro.config.low_ram2g=true
+
+# DON'T FORCE HOME LAUNCHER INTO MEMORY
+ro.HOME_APP_ADJ=0
+
+# DALVIK VM HEAP 1GB CONFIG (MAKES SYSTEM USES LESS RAM)
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heapgrowthlimit=64m
+dalvik.vm.heapsize=128m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=2m
+dalvik.vm.heapmaxfree=8m
+
+# DISABLE BOOTANIMATION FOR QUICKER BOOT & FAST REBOOT
+ro.config.hw_quickpoweron=true
+debug.sf.nobootanimation=1
+dev.bootcomplete=0
