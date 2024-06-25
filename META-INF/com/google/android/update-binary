@@ -21,7 +21,6 @@ require_new_magisk() {
 
 is_legacy_script() {
   unzip -l "$ZIPFILE" install.sh | grep -q install.sh
-  unzip -l "$ZIPFILE" demonica.sh | grep -q demonica.sh
   return $?
 }
 
@@ -82,12 +81,10 @@ mkdir -p $MODPATH
 ##########################################################################################
 
 if is_legacy_script; then
-  unzip -oj "$ZIPFILE" module.prop install.sh uninstall.sh 'common/*' -d $TMPDIR >&2
-  unzip -oj "$ZIPFILE" module.prop demonica.sh uninstall.sh 'common/*' -d $TMPDIR >&2
+  unzip -oj "$ZIPFILE" module.prop customize.sh uninstall.sh 'common/*' -d $TMPDIR >&2
 
   # Load install script
   . $TMPDIR/install.sh
-  . $TMPDIR/demonica.sh
 
   # Callbacks
   print_modname
@@ -110,19 +107,17 @@ if is_legacy_script; then
 
   # service scripts
   $LATESTARTSERVICE && cp -af $TMPDIR/service.sh $MODPATH/service.sh
-  
+
+  ui_print "- Setting permissions"
   set_permissions
 else
   print_modname
 
   unzip -o "$ZIPFILE" customize.sh -d $MODPATH >&2
-  unzip -o "$ZIPFILE" demonica.sh -d $MODPATH >&2
 
-  if ! grep -q '^SKIPUNZIP=1$' $MODPATH/demonica.sh 2>/dev/null; then
-  
+  if ! grep -q '^SKIPUNZIP=1$' $MODPATH/customize.sh 2>/dev/null; then
     ui_print "- Extracting module files"
     unzip -o "$ZIPFILE" -x 'META-INF/*' -d $MODPATH >&2
-    unzip -qjo "$ZIPFILE" 'common/' -d $TMPDIR >&2
 
     # Default permissions
     set_perm_recursive $MODPATH 0 0 0755 0644
@@ -130,7 +125,6 @@ else
 
   # Load customization script
   [ -f $MODPATH/customize.sh ] && . $MODPATH/customize.sh
-  [ -f $MODPATH/demonica.sh ] && . $MODPATH/demonica.sh
 fi
 
 # Handle replace folders
@@ -156,8 +150,6 @@ fi
 # Remove stuffs that don't belong to modules
 rm -rf \
 $MODPATH/system/placeholder $MODPATH/customize.sh \
-$MODPATH/system/placeholder $MODPATH/demonica.sh \
-rm_exist "$MODPATH/demonica.sh"
 $MODPATH/README.md $MODPATH/.git* 2>/dev/null
 
 ##########################################################################################
